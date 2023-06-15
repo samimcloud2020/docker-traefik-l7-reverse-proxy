@@ -1,0 +1,11 @@
+we’re defining two services: traefik and whoami. 
+The traefik service is the Traefik reverse proxy itself, 
+and the whoami service is a simple HTTP server that will be routed by Traefik.
+
+For the whoami service,
+we’ve added some Traefik-specific labels that instruct Traefik to 
+route traffic to the whoami service using the hostname whoami.local.
+
+With this configuration, if you run docker-compose up, you should be able to access the whoami service by navigating 
+to http://whoami.local in your web browser. Traefik will automatically route the traffic to the whoami container.
+You can also access the Traefik dashboard at http://localhost:8080/dashboard/.
