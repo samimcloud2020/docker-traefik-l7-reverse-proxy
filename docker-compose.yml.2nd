@@ -37,7 +37,7 @@ services:
       - "traefik"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.vote.rule=Host(`vote.localhost`)"
+      - "traefik.http.routers.vote.rule=Host(`vote.trycloud.co.in`)"
       - "traefik.http.services.vote.loadbalancer.server.port=80"  
     deploy:
       replicas: 1
@@ -56,7 +56,7 @@ services:
       - "traefik"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.result.rule=Host(`result.localhost`)"
+      - "traefik.http.routers.result.rule=Host(`result.trycloud.co.in`)"
       - "traefik.http.services.result.loadbalancer.server.port=80"  
     deploy:
       replicas: 1
@@ -91,16 +91,18 @@ services:
     ports:
       - "80:80"
       - "8080:8080"
+      - "443:443"
     volumes:
+      - /etc/traefik:/etc/traefik
       - /var/run/docker.sock:/var/run/docker.sock:ro    
     networks:
         - "frontend"
         - "backend"
 networks:
     backend:
-        driver: overlay
+        driver: bridge
     frontend:
-        driver: overlay
+        driver: bridge
 volumes:
     db-data:
         driver: local
